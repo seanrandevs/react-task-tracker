@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid"
 import { useState } from "react"
 import Header from './components/Header'
 import Tasks from './components/Tasks'
@@ -27,7 +28,9 @@ function App() {
 
   // Add Task
   const addTask = (task) => {
-    console.log(task)
+    const id = nanoid()
+    const newTask = { id, ...task }
+    setTasks([...tasks, newTask])
   }
 
   // Delete Task
