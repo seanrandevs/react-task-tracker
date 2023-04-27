@@ -2,8 +2,7 @@ import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
   const [text, setText] = useState('')
-  const [day, setDay] = useState('')
-  const [reminder, setReminder] = useState(false)
+  const [complete, setComplete] = useState(false)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -13,15 +12,14 @@ const AddTask = ({ onAdd }) => {
       return
     }
     // If there is a text then run this function
-    onAdd({ text, day, reminder })
+    onAdd({ text, complete })
     // Reset the values in the inputs
     setText('')
-    setDay('')
-    setReminder(false)
+    setComplete(false)
   }
 
   return (
-    <form className="add-form" onSubmit={onSubmit}>
+    <form className="add-form" data-testid="form-id" onSubmit={onSubmit}>
        <div className="form-control">
          <label>Task</label>
          <input type="text" placeholder="Add Task" 
@@ -29,24 +27,8 @@ const AddTask = ({ onAdd }) => {
          onChange={(e) => setText(e.target.value)}
          />
        </div>
-       <div className="form-control">
-         <label>Day & Time</label>
-         <input type="text" placeholder="Add Day & Time" 
-         value={day} 
-         onChange={(e) => setDay(e.target.value)}
-         />
-       </div>
-       <div className="form-control 
-       form-control-check">
-         <label>Set Reminder</label>
-         <input type="checkbox" 
-         checked={reminder}
-         value={reminder} 
-         onChange={(e) => setReminder(e.currentTarget.checked)}
-         />
-       </div>
 
-       <input type="submit" value="Save Task" 
+       <input data-testid="btn" type="submit" value="Save Task" 
        className="btn btn-block" />
     </form>
   )
