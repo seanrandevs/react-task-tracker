@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid"
 import { useState, useEffect } from "react"
-import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
@@ -51,7 +50,6 @@ function App() {
     const newTask = { id, ...task }
     setTasks([...tasks, newTask])
   }
-console.log(tasks)
   // Delete Task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id))
@@ -91,10 +89,7 @@ console.log(tasks)
       showAdd={showAddTask}
       />
       
-     <Routes>
-      <Route path='/'
-      element={(
-        <>
+    
           {showAddTask && <AddTask onAdd={addTask} />}
           {tasks.length > 0 ? ( 
           <Tasks tasks={tasks} 
@@ -102,9 +97,6 @@ console.log(tasks)
           onToggle={toggleComplete}
           />)
           : ( 'No Task To Show')}
-        </>
-      )} />
-     </Routes>
     </div>
   );
 }
