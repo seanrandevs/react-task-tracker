@@ -19,16 +19,16 @@ const AddTask = ({ onAdd }) => {
   }
 
   return (
-    <form className="add-form" data-testid="form-id" onSubmit={onSubmit}>
+    <form className="add-form" onSubmit={onSubmit}>
        <div className="form-control">
          <label>Task</label>
-         <input type="text" placeholder="Add Task" 
+         <input type="text" data-testid="task-input" placeholder="Add Task" 
          value={text} 
          onChange={(e) => setText(e.target.value)}
          />
        </div>
 
-       <input data-testid="btn" type="submit" value="Save Task" 
+       <input data-testid="add-btn" type="submit" value="Save Task"
        className="btn btn-block" />
     </form>
   )

@@ -1,22 +1,27 @@
 import { FaTimes, FaCheck } from 'react-icons/fa'
 
-const Task = ({ task, onDelete, onToggle }) => {
+const TaskDiv = ({ task, onDelete, onToggle }) => {
   return (
-    <div className={`task 
+    <li 
+    className={`task
     ${task.complete ? 'completed' : ''}`}
     onDoubleClick={() => onToggle(task.id)}
     >
-     <h3 data-testid="task">{task.text} 
-     <FaCheck className='check-mark'
+     <h3>{task.text} 
+     <FaCheck 
+     className='check-mark'
+     data-testid="complete-btn"
      onClick={() => onToggle(task.id)} 
       />
-     <FaTimes className='times' style={{ 
+     <FaTimes 
+      data-testid="delete-btn"
+     className='times' style={{ 
       color: 'red'}} 
       onClick={() => onDelete(task.id)}
       />
       </h3>
-    </div>
+    </li>
   )
 }
 
-export default Task
+export default TaskDiv

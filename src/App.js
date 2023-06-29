@@ -1,11 +1,11 @@
-import { nanoid } from "nanoid"
-import { useState, useEffect } from "react"
-import Header from './components/Header'
-import Tasks from './components/Tasks'
-import AddTask from './components/AddTask'
+import { v4 } from "uuid";
+import { useState, useEffect } from "react";
+import Header from './components/Header';
+import Tasks from './components/Tasks';
+import AddTask from './components/AddTask';
 
 function App() {
-  const [showAddTask, setShowAddTask] = useState(false)
+  
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("TASKS")) || [])
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function App() {
 
     // setTasks([...tasks], data)
 
-    const id = nanoid()
+    const id = v4();
     const newTask = { id, ...task }
     setTasks([...tasks, newTask])
   }
@@ -80,23 +80,19 @@ function App() {
     setTasks(tasks.map((task) => task.id === id ?
     { ...task, complete: !task.complete} : task))
   }
+  console.log(tasks)
 
   return (
 
     <div className="container">
-      <Header 
-      onAdd={() => setShowAddTask(!showAddTask)}
-      showAdd={showAddTask}
-      />
-      
-    
-          {showAddTask && <AddTask onAdd={addTask} />}
-          {tasks.length > 0 ? ( 
-          <Tasks tasks={tasks} 
-          onDelete={deleteTask}
-          onToggle={toggleComplete}
-          />)
-          : ( 'No Task To Show')}
+      <Header />
+      <AddTask onAdd={addTask} />
+      {tasks.length > 0 ? ( 
+      <Tasks taskItem={tasks} 
+      onDelete={deleteTask}
+      onToggle={toggleComplete}
+      />)
+      : ( <div data-testid="no-task">No Task To Show</div> )}
     </div>
   );
 }
